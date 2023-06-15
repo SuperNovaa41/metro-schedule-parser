@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Metro Schedule Getter</title>
+	</head>
+	<body>
+		<style>
+			p {
+				color: white;
+			}
+			#content {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+				width: 100%;
+				height: 100vh;
+			}
+			#entry {
+				position: relative;
+				padding: 1rem;
+			}
+			#id-btn {
+				background-color: #d81e05;
+				color: white;
+				border: none;
+				padding: 5px;
+				border-radius: 5px;
+			}
+		</style>
+		<script>
+			function getSchedule()
+			{
+    			window.location = "/schedule/" + document.getElementById("id").value;
+			}
+		</script>
+		<div id="content">
+			<div id="entry">
+				<img id="logo" src="https://myschedule.metro.ca/app/components/shared/img/metro.png">
+			</div>
+			<div id="entry">
+				<input type="text" id="id" name="Employee ID" />
+				<button id="id-btn" onclick="getSchedule()">Submit!</button>
+			</div>
+		</div>
+	</body>
+</html>
