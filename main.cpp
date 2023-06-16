@@ -40,8 +40,8 @@ void run_schedule_getter(std::string id)
 	file << id;
 	file.close();
 
-	FILE *fd = fopen("main.py", "r");
-	PyRun_SimpleFileEx(fd, "main.py", 1);
+	FILE *fd = fopen("get_schedule.py", "r");
+	PyRun_SimpleFileEx(fd, "get_schedule.py", 1);
 
 	Py_Finalize();
 }
