@@ -1,5 +1,6 @@
 import requests
 import json
+from datetime import datetime
 
 def get_id():
     with open("id.txt", "r") as file:
@@ -14,18 +15,19 @@ def get_shift(schedule_day):
     if (shift == "-"):
         return 
 
-    datestr = schedule_day["StartDate"]
-    date = datestr[0:4] + datestr[5:7] + datestr[8:10] + "T"
+    date_obj = datetime.strptime(schedule_day["StartDate"], "%Y-%m-%dT%H:%M:%S")
 
     split_shift = shift.split("-", 1)
-    startdate = date + cleanse_hour(split_shift[0]) + "00"
+    time = datetime.strptime(split_shift[0], "%H:%M")
+    start_time_obj = date_obj.replace(hour = time.hour, minute = time.minute)
 
     split_shift = split_shift[1].split(" ", 1)
-    enddate = date + cleanse_hour(split_shift[0]) + "00"
+    time = datetime.strptime(split_shift[0], "%H:%M")
+    end_time_obj = date_obj.replace(hour = time.hour, minute = time.minute)
 
     dept = split_shift[1]
     
-    return (startdate, enddate, dept)
+    return (start_time_obj.strftime("%Y%m%dT%H%M%S"), end_time_obj.strftime("%Y%m%dT%H%M%S"), dept)
 
 sess = requests.Session()
 
