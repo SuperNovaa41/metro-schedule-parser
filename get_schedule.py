@@ -1,7 +1,5 @@
 import requests
 import json
-from datetime import datetime
-import sys
 
 def get_id():
     with open("id.txt", "r") as file:
