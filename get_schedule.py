@@ -6,10 +6,6 @@ def get_id():
     with open("id.txt", "r") as file:
         return file.read()
 
-def cleanse_hour(hour):
-    split_hour = hour.split(":", 1)
-    return (split_hour[0] if (len(split_hour[0]) == 2) else "0" + split_hour[0]) + split_hour[1]
-
 def get_shift(schedule_day):
     shift = schedule_day["DailyShift"][0]
     if (shift == "-"):
@@ -41,18 +37,15 @@ with open("calendar.ics", "w") as file:
     file.write("VERSION:2.0\n")
     file.write("PRODID:SuperNovaa41\n")
 
-for i in range(-1, -8, -1):
-    res = get_shift(total_schedule["WorkTime"][i])
-    if (res is None):
-        continue
-
-    with open("calendar.ics", "a") as file:
+    for i in range(-1, -8, -1):
+        res = get_shift(total_schedule["WorkTime"][i])
+        if (res is None):
+            continue
         file.write("BEGIN:VEVENT\n")
         file.write("DTSTART:" + res[0] + "\n")
         file.write("DTEND:" + res[1] + "\n")
         file.write("SUMMARY: Work (" + res[2] + ")\n")
         file.write("END:VEVENT\n")
 
-with open("calendar.ics", "a") as file:
     file.write("END:VCALENDAR\n")
 
