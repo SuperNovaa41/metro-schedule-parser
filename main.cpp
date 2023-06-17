@@ -42,6 +42,7 @@ void run_schedule_getter(std::string id)
 
 	FILE *fd = fopen("get_schedule.py", "r");
 	PyRun_SimpleFileEx(fd, "get_schedule.py", 1);
+	fclose(fd);
 
 	Py_Finalize();
 }
